@@ -1,3 +1,9 @@
+/* ===================================
+   Wedding Site Layout & Styles
+   Fall Theme for Lauren & Cody
+   =================================== */
+
+/* Base Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,35 +12,47 @@
 
 html, body, #root {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
 }
 
-.door-container {
-  position: relative;
+/* Main Site Container */
+.wedding-site {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* Fixed Background Layer */
+.background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   background-size: 200px;
   background-position: center;
   background-repeat: repeat;
+  z-index: 0;
 }
 
-.content-column {
-  position: absolute;
+/* ===================================
+   Door Animation (Preserved)
+   =================================== */
+.door-container {
+  position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  padding: 2rem;
-  background-color: #fff;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.door-container[style*="opacity: 0"] {
+  visibility: hidden;
 }
 
 .door {
@@ -77,32 +95,446 @@ html, body, #root {
   transform: scaleX(-1);
 }
 
-.header {
-  font-size: 4rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
-  margin: 0;
+/* ===================================
+   Main Content
+   =================================== */
+.main-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 1;
+  background-color: var(--color-bg-alt);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.08);
+}
+
+/* ===================================
+   Hero Section
+   =================================== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: var(--space-md);
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.hero-pretext {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-names {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 300;
+  color: var(--color-charcoal);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-sm);
+}
+
+.ampersand {
+  font-style: italic;
+  color: var(--color-accent);
+  font-weight: 300;
+  display: inline-block;
+  margin: 0 0.1em;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent-light),
+    transparent
+  );
+  margin: var(--space-md) auto;
+}
+
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-charcoal);
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.hero-date {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: var(--space-sm);
+}
+
+.hero-rsvp-button {
+  margin-top: var(--space-lg);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-rsvp-button:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--color-text-light);
+}
+
+.hero-scroll-indicator span {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-text-light),
+    transparent
+  );
+  margin: 0 auto;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.5; transform: scaleY(0.8); }
+}
+
+/* ===================================
+   Section Base Styles
+   =================================== */
+.section {
+  padding: var(--space-xl) var(--space-md);
+}
+
+.section-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.decorative-line {
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent);
+  margin: 0 auto var(--space-lg);
+}
+
+/* ===================================
+   Story Section
+   =================================== */
+.story-section {
+  background: transparent;
+}
+
+.story-text {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--color-charcoal);
+  max-width: 650px;
+  margin: 0 auto var(--space-md);
+  font-weight: 400;
+}
+
+.story-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ===================================
+   Details Section
+   =================================== */
+.details-section {
+  background: transparent;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+.detail-card {
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.detail-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-accent-light);
+  border-radius: 50%;
+  color: var(--color-accent);
+}
+
+.detail-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-xs);
+}
+
+.detail-info {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+  margin-bottom: 0.25rem;
+}
+
+.detail-subinfo {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  font-weight: 400;
+}
+
+/* ===================================
+   Schedule Section
+   =================================== */
+.schedule-section {
+  background: var(--color-accent-dark);
+}
+
+.schedule-section .section-title {
+  color: #FFFFFF;
+}
+
+.schedule-section .decorative-line {
+  background: var(--color-accent-light);
+}
+
+.timeline {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-time {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-light);
+  min-width: 90px;
+  padding-top: 0.25rem;
+}
+
+.timeline-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-content p {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+}
+
+/* ===================================
+   RSVP Section
+   =================================== */
+.rsvp-section {
+  background: var(--color-accent);
+  padding: var(--space-lg) var(--space-md);
+}
+
+.rsvp-section .section-title {
+  color: #FFFFFF;
+}
+
+.rsvp-section .decorative-line {
+  background: var(--color-accent-light);
+}
+
+.rsvp-text {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #FFFFFF;
+  margin-bottom: var(--space-md);
+}
+
+.rsvp-button {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  background-color: #FFFFFF;
+  color: var(--color-accent);
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rsvp-button:hover {
+  background-color: transparent;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+/* ===================================
+   Footer
+   =================================== */
+.footer {
+  background-color: var(--color-charcoal);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.footer-names {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
+
+.footer-date {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-md);
 }
 
 .reset-button {
-  position: absolute;
-  bottom: 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
   cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: background 0.2s, border-color 0.2s;
-  z-index: 20;
+  transition: all 0.3s ease;
 }
 
 .reset-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  background: transparent;
+}
+
+/* ===================================
+   Responsive Adjustments
+   =================================== */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: var(--space-sm);
+  }
+
+  .hero-content {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .section {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .details-grid {
+    gap: var(--space-md);
+  }
+
+  .timeline {
+    padding: 0 var(--space-sm);
+  }
+
+  .timeline-item {
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-align: center;
+  }
+
+  .timeline-time {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-names {
+    font-size: 2.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
 }
